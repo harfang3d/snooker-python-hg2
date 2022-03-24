@@ -7,32 +7,9 @@ from sprites import *
 from animations import *
 import subprocess
 import re
-from tqdm import tqdm
-
-
-# Compile assets:
-
-# execute commande line and show stdout:
-def run_command(exe):
-	def execute_com(command):
-		p = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
-		return iter(p.stdout.readline, b'')
-
-	t = tqdm(total=100)
-	percent_prec = 0
-	for line in execute_com(exe):
-		if "Progress" in str(line):
-			percent = int(re.findall('\d*%', str(line))[0].split("%")[0])
-			t.update(percent - percent_prec)
-			percent_prec = percent
-
-
-print("Compiling assets...")
-run_command("bin\\assetc.exe assets assets_compiled -quiet -progress")
 
 # Game vars
 res_x, res_y = 1920, 1080
-
 
 class Main:
 	flag_AAA = True
