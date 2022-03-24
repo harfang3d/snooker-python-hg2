@@ -4,7 +4,7 @@
 
 *Become a pool player and test out our physics engine.*
 
-![Snooker Banner](https://github.com/harfang3d/snooker-python-hg2/raw/master/screenshots/scene0.png)
+![Snooker Banner](https://github.com/harfang3d/snooker-python-hg2/raw/main/screenshots/scene0.png)
 
 ## How to run Snooker
 
@@ -21,3 +21,5 @@
 * Release : Clément Beudot
 
 ## Screenshots
+![Screenshot 1](https://github.com/harfang3d/snooker-python-hg2/raw/main/screenshots/scene1.png)
+![Screenshot 2](https://github.com/harfang3d/snooker-python-hg2/raw/main/screenshots/scene2.png)
