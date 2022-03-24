@@ -17,7 +17,7 @@
 1. run *main.py*
 
 ## Credits
-* Python programming : François Gutherz, Eric Kernin
+* Python programming : Eric Kernin
 * Release : Clément Beudot
 
 ## Screenshots
