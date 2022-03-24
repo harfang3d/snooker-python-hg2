@@ -12,7 +12,13 @@ import re
 res_x, res_y = 1920, 1080
 
 class Main:
-	flag_AAA = True
+	if len(sys.argv) >= 2:
+		if sys.argv[1] == "--aaa":
+			flag_AAA = True
+		else:
+			flag_AAA = False
+	else:
+		flag_AAA = False
 	flag_start = False
 	flag_gui = False
 

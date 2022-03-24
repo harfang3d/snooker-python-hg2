@@ -14,7 +14,8 @@
 	1. Either download it from the [HARFANG website](https://www.harfang3d.com/releases/3.2.0/) and follow the [install instructions](https://www.harfang3d.com/docs/3.2.0/man.cpython/)
 	1. Or, using PIP in the command line, type '*pip install -Iv harfang==3.2.0*'
 1. Clone/download this repository
-1. run *main.py*
+1. run *python main.py* to launch the game
+1. run *python main.py --aaa* to launch the game with AAA quality
 
 ## Credits
 * Python programming : François Gutherz, Eric Kernin
