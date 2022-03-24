@@ -1,0 +1,9 @@
+{
+	"profiles": {
+		"default": {
+			"compression": "BC3",
+			"wrap-U": "Clamp",
+			"wrap-V": "Clamp"
+		}
+	}
+}
