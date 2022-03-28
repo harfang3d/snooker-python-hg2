@@ -111,7 +111,7 @@ def init_game():
 	hg.InputInit()
 	hg.WindowSystemInit()
 
-	Main.win = hg.RenderInit('Dislay_scene', res_x, res_y, hg.RF_VSync | hg.RF_MSAA4X)
+	Main.win = hg.RenderInit('Snooker game', res_x, res_y, hg.RF_VSync | hg.RF_MSAA4X)
 	hg.RenderReset(res_x, res_y, hg.RF_VSync | hg.RF_MSAA8X | hg.RF_MaxAnisotropy)
 
 	# Setup assets folder
