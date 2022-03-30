@@ -1,6 +1,6 @@
 # Snooker 3D simulation in Python 
 
-**Snooker** is a simple game that was programmed in Python using the HARFANG 3D framework.
+**Snooker** is a simple game that was programmed in Python using the [HARFANG 3D framework](https://www.harfang3d.com).
 
 *This project implements the simplest possible gameplay loop, relying on the Bullet physics engine for the most complex part of the simulation. This project can be used as a basis for the development of a more complex gameplay, or for AI training by plugging directly into the code that manages the game interactions.*
 
