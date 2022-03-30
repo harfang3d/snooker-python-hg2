@@ -8,7 +8,14 @@
 
 ## How to run the Snooker ?
 
-### Python
+### The easy way
+
+1. Download the [Windows release](https://github.com/harfang3d/snooker-python-hg2/releases)
+2. Unzip it in a local folder
+3. Double click on `2-start_game.bat` if you run the game on a low-end machine
+4. Double click on `2bis-start_game - AAA quality.bat` if you run the game on a low-end machine with a discrete GPU (GeForce GTX850 or above)
+
+### Using your own Python interpreter
 1. Get [Python 3](https://www.python.org/downloads/)
 1. Get HARFANG 3D
 	1. Either download it from the [HARFANG website](https://www.harfang3d.com/releases/3.2.0/) and follow the [install instructions](https://www.harfang3d.com/docs/3.2.0/man.cpython/)
@@ -18,10 +25,11 @@
 1. run *python main.py --aaa* to launch the game with AAA quality
 
 ## How to play ?
-1. Click on one of the 3 balls with the left mouse button.
-1. Aim by moving the mouse on the horizontal axis.
-1. Shoot with the left mouse button.
-1. To reset the game, press the right mouse button.
+1. Click on one of the 3 balls with the `left mouse button`.
+1. Aim by moving the mouse on the `horizontal axis`.
+1. Shoot with the `left mouse button`.
+1. To reset the game, press the `right mouse button`.
+1. Press `ESC` to quit.
 
 ## Credits
 * Python programming : Eric Kernin
