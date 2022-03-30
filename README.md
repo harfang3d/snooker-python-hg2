@@ -13,7 +13,7 @@
 1. Download the [Windows release](https://github.com/harfang3d/snooker-python-hg2/releases) (Snooker.Release.HG.3.2.0.zip)
 2. Unzip it in a local folder
 3. Double click on `2-start_game.bat` if you run the game on a low-end machine
-4. Double click on `2bis-start_game - AAA quality.bat` if you run the game on a low-end machine with a discrete GPU (GeForce GTX850 or above)
+4. Double click on `2bis-start_game - AAA quality.bat` if you run the game on a high-end machine with a discrete GPU (GeForce GTX850 or above)
 
 ### Using your own Python interpreter
 1. Get [Python 3](https://www.python.org/downloads/)
