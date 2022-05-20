@@ -186,41 +186,38 @@ def init_game():
 
 # Tools
 
-def get_ball_radius(ball):
-	_, mm = ball.GetObject().GetMinMax(Main.pipeline_res)
+def get_object_radius(object): #, pipeline_resources: hg.PipelineResources):
+	_, mm = object.GetObject().GetMinMax(Main.pipeline_res)
 	size = (mm.mx - mm.mn)
-	return size.x / 2
+	return max(size.z,(max(size.x, size.y))) / 2
 
 
-def get_2d(camera, point3d: hg.Vec3, resolution: hg.Vec2):
-	cam_mat = camera.GetTransform().GetWorld()
-	view_matrix = hg.InverseFast(cam_mat)
-	c = camera.GetCamera()
-	projection_matrix = hg.ComputePerspectiveProjectionMatrix(c.GetZNear(), c.GetZFar(), hg.FovToZoomFactor(c.GetFov()), hg.Vec2(resolution.x / resolution.y, 1))
-	pos_view = view_matrix * point3d
-	flag, pos2d = hg.ProjectToScreenSpace(projection_matrix, pos_view, resolution)
+def get_screen_position(camera:hg.Node, point: hg.Vec3, resolution: hg.Vec2):
+	cam = camera.GetCamera()
+	view_state = hg.ComputePerspectiveViewState(camera.GetTransform().GetWorld(), cam.GetFov(), cam.GetZNear(), cam.GetZFar(), hg.ComputeAspectRatioX(resolution.x, resolution.y))
+	flag, pos2d = hg.ProjectToScreenSpace(view_state.proj, view_state.view * point, resolution)
 	if flag:
-		return hg.Vec2(pos2d.x, pos2d.y) / resolution
+		return hg.Vec2(pos2d.x, pos2d.y)
 	else:
 		return None
 
 
-def hover_ball_test():
-	cam = Main.scene.GetNode("Camera")
-	campos = cam.GetTransform().GetPos()
-	Main.balls.sort(key=lambda x: hg.Len(x.GetTransform().GetPos() - campos))
-	Main.current_ball_hover = None
-	for ball in Main.balls:
-		ball_pos = hg.GetT(ball.GetTransform().GetWorld())
-		ball_r = get_ball_radius(ball)
-		r2d = ball_r * hg.FovToZoomFactor(cam.GetCamera().GetFov()) / hg.Len(ball_pos - campos) * Main.resolution.y / 2
-		p = get_2d(cam, ball_pos, Main.resolution)
-		if p is not None:
-			p *= Main.resolution
-			ms = hg.Vec2(Main.mouse.X(), Main.mouse.Y())
-			if hg.Len(ms - p) < r2d:
-				Main.current_ball_hover = ball
-				break
+def hover_objects_test(objects_list: list, camera: hg.Node, resolution: hg.Vec2, mouse_position: hg.Vec2):
+	camera_pos = camera.GetTransform().GetPos()
+	objects_list.sort(key = lambda x: hg.Len(hg.GetT(x.GetTransform().GetWorld()) - camera_pos))
+	cam_aY = hg.GetY(camera.GetTransform().GetWorld())
+	for object in objects_list:
+		object_position = hg.GetT(object.GetTransform().GetWorld())
+		object_screen_position = get_screen_position(camera, object_position, resolution)
+		if object_screen_position is not None:
+			object_radius = get_object_radius(object)
+			object_bound_position = object_position + cam_aY * object_radius
+			object_bound_screen_position = get_screen_position(camera, object_bound_position, resolution)
+			if object_bound_screen_position is not None:
+				object_screen_radius = hg.Len(object_bound_screen_position - object_screen_position)
+				if hg.Len( mouse_position - object_screen_position) < object_screen_radius:
+					return object
+	return None
 
 
 def compute_mouse_circular_pos(pos, target_pos, distance, ground_altitude):
@@ -298,7 +295,7 @@ def setup_collisions():
 	Main.scene_physics.SceneCreatePhysicsFromAssets(Main.scene)
 
 	vtx_layout = hg.VertexLayoutPosFloatNormUInt8()
-	ball_r = get_ball_radius(Main.balls[0])
+	ball_r = get_object_radius(Main.balls[0])
 	sphere_mdl = hg.CreateSphereModel(vtx_layout, ball_r, 12, 24)
 	Main.sphere_ref = Main.pipeline_res.AddModel('sphere', sphere_mdl)
 
@@ -351,10 +348,10 @@ def state_observation_update():
 			else:
 				return setup_state_targeting()
 		else:
-			hover_ball_test()
+			Main.current_ball_hover = hover_objects_test(Main.balls, Main.scene.GetCurrentCamera(), Main.resolution, hg.Vec2(Main.mouse.X(), Main.mouse.Y()))
 			if Main.current_ball_hover is not None:
 				ball_pos = hg.GetT(Main.current_ball_hover.GetTransform().GetWorld())
-				p = get_2d(Main.scene.GetCurrentCamera(), ball_pos, Main.resolution) * Main.resolution
+				p = get_screen_position(Main.scene.GetCurrentCamera(), ball_pos, Main.resolution)
 				if p is not None:
 					Main.selector.set_position(p.x, p.y + Main.selector_offset_y)
 					Main.sprites_display_list.append(Main.selector)
@@ -471,7 +468,7 @@ def setup_state_shoot():
 	Main.stick.GetTransform().SetPos(stick_pos_start)
 	Main.stick.GetTransform().SetRot(stick_rot_start)
 	v = Main.shoot_p - stick_pos_start
-	distance = hg.Len(v) - get_ball_radius(Main.shoot_ball)
+	distance = hg.Len(v) - get_object_radius(Main.shoot_ball)
 	stick_pos_dest = stick_pos_start + hg.Normalize(v) * distance
 	stick_rot_dest = hg.Vec3(0, stick_rot_start.y, -10 / 180 * pi)
 	Main.anim_stick_pos = Animation(Main.ts, 0.25, stick_pos_start, stick_pos_dest, Animations.TWEEN_EASEINQUAD)
