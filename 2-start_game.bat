@@ -1,2 +1,2 @@
-python main.py
+bin\python\python.exe main.py
 pause
