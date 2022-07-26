@@ -28,7 +28,7 @@
 			255
 		],
 		"brdf_map": "core/pbr/brdf.dds",
-		"current_camera": null,
+		"current_camera": 9,
 		"fog_color": [
 			0,
 			0,
@@ -37,8 +37,27 @@
 		],
 		"fog_far": 20.0,
 		"fog_near": 10.0,
-		"irradiance_map": "core/pbr/fireplace_1k.hdr.irradiance",
-		"radiance_map": "core/pbr/fireplace_1k.hdr.radiance"
+		"probe": {
+			"irradiance_map": "core/pbr/fireplace_1k.hdr.irradiance",
+			"parallax": 0.0,
+			"pos": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"radiance_map": "core/pbr/fireplace_1k.hdr.radiance",
+			"rot": [
+				0.0,
+				0.0,
+				0.0
+			],
+			"scl": [
+				1.0,
+				1.0,
+				1.0
+			],
+			"type": "sphere"
+		}
 	},
 	"instances": [
 		{
