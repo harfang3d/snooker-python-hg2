@@ -1,1 +1,2 @@
-bin\assetc\assetc.exe assets assets_compiled
+bin\assetc\assetc.exe assets -quiet
+pause
