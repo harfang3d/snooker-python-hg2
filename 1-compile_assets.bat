@@ -1,2 +1,2 @@
-bin\assetc\assetc.exe assets -quiet
+bin\assetc\assetc.exe assets -api GL -quiet
 pause
