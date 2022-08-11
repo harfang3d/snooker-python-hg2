@@ -598,7 +598,7 @@ while not Main.keyboard.Pressed(hg.K_Escape):
 	dt = hg.TickClock()
 
 	if dt > 1:
-		Main.ts += hg.time_to_sec_f(dt)
+		Main.ts = hg.time_to_sec_f(hg.GetClock())
 
 		# Update scene
 		hg.SceneUpdateSystems(Main.scene, Main.clocks, dt, Main.scene_physics, Main.physic_step, 10)
