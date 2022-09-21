@@ -21,6 +21,7 @@ class Main:
 		flag_AAA = False
 	flag_start = False
 	flag_gui = False
+	flag_OpenGL = True
 
 	mouse = None
 	keyboard = None
@@ -110,8 +111,14 @@ def display_physics_debug(vid):
 def init_game():
 	hg.InputInit()
 	hg.WindowSystemInit()
+	
+	Main.win = hg.NewWindow(res_x, res_y)
+	
+	if Main.flag_OpenGL:
+		hg.RenderInit(Main.win, hg.RT_OpenGL)
+	else:
+		hg.RenderInit(Main.win)
 
-	Main.win = hg.RenderInit('Snooker game', res_x, res_y, hg.RF_VSync | hg.RF_MSAA4X)
 	hg.RenderReset(res_x, res_y, hg.RF_VSync | hg.RF_MSAA8X | hg.RF_MaxAnisotropy)
 
 	# Setup assets folder
@@ -591,7 +598,7 @@ while not Main.keyboard.Pressed(hg.K_Escape):
 	dt = hg.TickClock()
 
 	if dt > 1:
-		Main.ts += hg.time_to_sec_f(dt)
+		Main.ts = hg.time_to_sec_f(hg.GetClock())
 
 		# Update scene
 		hg.SceneUpdateSystems(Main.scene, Main.clocks, dt, Main.scene_physics, Main.physic_step, 10)
