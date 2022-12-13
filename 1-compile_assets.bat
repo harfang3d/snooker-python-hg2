@@ -1,2 +1,2 @@
-bin\assetc\assetc.exe assets -api GL -quiet
+python -m harfang.bin assetc assets -quiet
 pause

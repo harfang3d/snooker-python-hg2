@@ -21,7 +21,7 @@ class Main:
 		flag_AAA = False
 	flag_start = False
 	flag_gui = False
-	flag_OpenGL = True
+	flag_OpenGL = False
 
 	mouse = None
 	keyboard = None
