@@ -1,2 +1,2 @@
-bin\python\python.exe main.py --aaa
+python main.py --aaa
 pause
