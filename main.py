@@ -145,7 +145,7 @@ def init_game():
 
 	# load host scene
 	Main.scene = hg.Scene()
-	hg.LoadSceneFromAssets("pool/pool_Main_scene.scn", Main.scene, Main.pipeline_res, hg.GetForwardPipelineInfo())
+	hg.LoadSceneFromAssets("pool/pool_main_scene.scn", Main.scene, Main.pipeline_res, hg.GetForwardPipelineInfo())
 	Main.balls.append(Main.scene.GetNode("ball_red"))
 	Main.balls.append(Main.scene.GetNode("ball_white"))
 	Main.balls.append(Main.scene.GetNode("ball_yellow"))
